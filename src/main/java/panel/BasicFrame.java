@@ -75,15 +75,19 @@ public class BasicFrame extends JFrame {
             }
         }
         public void makeRequest() throws IOException {
-            url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q=my");
+
+            String text = textFieldOne.getText();
+            url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q="+text);
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("accept", "application/json");
             InputStream responseStream = connection.getInputStream();
 
             ObjectMapper mapper = new ObjectMapper();
             Root root = mapper.readValue(responseStream, Root.class);
-            System.out.println("translate");
-            System.out.println(root.data.translations);
+
+            String translate = root.data.translations.toString();
+            textFieldTwo.setText(translate);
         }
     }
 }
