@@ -13,15 +13,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class BasicFrame extends JFrame {
-    JButton buttonOne;
+    JButton buttonOne, buttonTwo;
     JLabel labelOne, labelTwo;
     JTextField textFieldOne, textFieldTwo;
     URL url;
     String stringOne;
     String textOne;
     final int number20 = 20;
-    final int number80 = 80;
-    final int number100 = 100;
     final int number250 = 250;
     eHandler handler = new eHandler();
 
@@ -39,15 +37,17 @@ public class BasicFrame extends JFrame {
         textFieldOne = new JTextField(25);
         textFieldTwo = new JTextField(25);
         labelOne = new JLabel("English");
-        buttonOne = new JButton("Translate");
+        buttonOne = new JButton("T");
+        buttonTwo = new JButton("S");
 
     }
 
 
     public void setSize() {
-        textFieldOne.setPreferredSize(new Dimension(number80, number100));
-        textFieldTwo.setPreferredSize(new Dimension(number80, number100));
-        buttonOne.setPreferredSize(new Dimension(300, 50));
+        textFieldOne.setPreferredSize(new Dimension(200, 200));
+        textFieldTwo.setPreferredSize(new Dimension(200, 200));
+        buttonOne.setPreferredSize(new Dimension(50, 50));
+        buttonTwo.setPreferredSize(new Dimension(50, 50));
         labelOne.setPreferredSize(new Dimension(number250, number20));
         labelTwo.setPreferredSize(new Dimension(number250, number20));
     }
@@ -58,6 +58,7 @@ public class BasicFrame extends JFrame {
         add(textFieldOne);
         add(textFieldTwo);
         add(buttonOne);
+        add(buttonTwo);
         buttonOne.addActionListener(handler);
     }
 
@@ -77,7 +78,7 @@ public class BasicFrame extends JFrame {
         public void makeRequest() throws IOException {
 
             String text = textFieldOne.getText();
-            url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q="+text);
+            url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q="+text.replaceAll("\\s+", "+"));
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("accept", "application/json");
