@@ -13,64 +13,65 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TranslatorFrame extends JFrame {
-    JButton buttonOne, buttonTwo;
-    JLabel labelOne, labelTwo;
-    JTextField textFieldOne, textFieldTwo;
+    JButton buttonTranslate, buttonSave;
+    JLabel labelEnglishLanguage, labelRussianLanguage;
+    JTextField textFieldEnglish, textFieldRussian;
     URL url;
-    String stringOne;
-    String textOne;
+    String stringEnglish;
+    String textRussian;
     final int labelHeight = 20;
     final int labelWidth = 250;
 
     TranslationListener translationListener = new TranslationListener();
+    SaveTranslateListenner saveTranslateListenner = new SaveTranslateListenner();
 
-    public TranslatorFrame(String s){
+    public TranslatorFrame(String s) {
         super(s);
         setLayout(new FlowLayout());
 
-       createObject();
+        initScrean();
         setSize();
         addComponents();
 
     }
-    public void createObject() {
-        labelTwo = new JLabel("Russian");
-        textFieldOne = new JTextField(25);
-        textFieldTwo = new JTextField(25);
-        labelOne = new JLabel("English");
-        buttonOne = new JButton("Translate");
-        buttonTwo = new JButton("Save");
+
+    public void initScrean() {
+        labelRussianLanguage = new JLabel("Russian");
+        textFieldEnglish = new JTextField(25);
+        textFieldRussian = new JTextField(25);
+        labelEnglishLanguage = new JLabel("English");
+        buttonTranslate = new JButton("Translate");
+        buttonSave = new JButton("Save");
 
     }
-
 
     public void setSize() {
-        textFieldOne.setPreferredSize(new Dimension(200, 200));
-        textFieldTwo.setPreferredSize(new Dimension(200, 200));
-        buttonOne.setPreferredSize(new Dimension(150, 50));
-        buttonTwo.setPreferredSize(new Dimension(150, 50));
-        labelOne.setPreferredSize(new Dimension(labelWidth, labelHeight));
-        labelTwo.setPreferredSize(new Dimension(labelWidth, labelHeight));
+        textFieldEnglish.setPreferredSize(new Dimension(200, 200));
+        textFieldRussian.setPreferredSize(new Dimension(200, 200));
+        buttonTranslate.setPreferredSize(new Dimension(150, 50));
+        buttonSave.setPreferredSize(new Dimension(150, 50));
+        labelEnglishLanguage.setPreferredSize(new Dimension(labelWidth, labelHeight));
+        labelRussianLanguage.setPreferredSize(new Dimension(labelWidth, labelHeight));
     }
 
-    public void addComponents(){
-        add(labelOne);
-        add(labelTwo);
-        add(textFieldOne);
-        add(textFieldTwo);
-        add(buttonOne);
-        add(buttonTwo);
-        buttonOne.addActionListener(translationListener);
+    public void addComponents() {
+        add(labelEnglishLanguage);
+        add(labelRussianLanguage);
+        add(textFieldEnglish);
+        add(textFieldRussian);
+        add(buttonTranslate);
+        add(buttonSave);
+        buttonTranslate.addActionListener(translationListener);
+        buttonSave.addActionListener(saveTranslateListenner);
     }
 
-    public class TranslationListener implements ActionListener{
-
+    public class TranslationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource()==buttonOne){
-                 stringOne = textFieldOne.getText();
-                 textOne = stringOne;
-                 textFieldTwo.setText(textOne);
+            if (e.getSource() == buttonTranslate) {
+                stringEnglish = textFieldEnglish.getText();
+                textRussian = stringEnglish;
+                textFieldRussian.setText(textRussian);
                 try {
                     makeRequest();
                 } catch (IOException ex) {
@@ -78,20 +79,31 @@ public class TranslatorFrame extends JFrame {
                 }
             }
         }
-        public void makeRequest() throws IOException {
+    }
 
-            String text = textFieldOne.getText();
-            url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q="+text.replaceAll("\\s+", "+"));
+    public void makeRequest() throws IOException {
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("accept", "application/json");
-            InputStream responseStream = connection.getInputStream();
+        String text = textFieldEnglish.getText();
+        url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q=" + text.replaceAll("\\s+", "+"));
 
-            ObjectMapper mapper = new ObjectMapper();
-            Root root = mapper.readValue(responseStream, Root.class);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("accept", "application/json");
+        InputStream responseStream = connection.getInputStream();
 
-            String translate = root.data.translations.toString();
-            textFieldTwo.setText(translate);
+        ObjectMapper mapper = new ObjectMapper();
+        Root root = mapper.readValue(responseStream, Root.class);
+
+        String translate = root.data.translations.toString();
+        textFieldRussian.setText(translate);
+    }
+
+    public class SaveTranslateListenner implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            stringEnglish = textFieldEnglish.getText();
+
+
         }
     }
 }

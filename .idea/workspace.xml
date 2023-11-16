@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5c581cd-d717-4070-b7b0-c8896fdcbfa2" name="Changes" comment="comfds">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TranslatorStarter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/Root.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Root.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/Translation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Translation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panel/BasicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TranslatorFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TranslatorFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TranslatorFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,17 +129,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="comfds" />
     <option name="LAST_COMMIT_MESSAGE" value="comfds" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/TranslatorFrame.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
