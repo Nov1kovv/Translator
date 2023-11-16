@@ -1,7 +1,7 @@
-package panel;
+package org.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.data.Root;
+import org.example.model.Root;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,18 +12,19 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class BasicFrame extends JFrame {
+public class TranslatorFrame extends JFrame {
     JButton buttonOne, buttonTwo;
     JLabel labelOne, labelTwo;
     JTextField textFieldOne, textFieldTwo;
     URL url;
     String stringOne;
     String textOne;
-    final int number20 = 20;
-    final int number250 = 250;
-    eHandler handler = new eHandler();
+    final int labelHeight = 20;
+    final int labelWidth = 250;
 
-    public BasicFrame(String s){
+    TranslationListener translationListener = new TranslationListener();
+
+    public TranslatorFrame(String s){
         super(s);
         setLayout(new FlowLayout());
 
@@ -37,8 +38,8 @@ public class BasicFrame extends JFrame {
         textFieldOne = new JTextField(25);
         textFieldTwo = new JTextField(25);
         labelOne = new JLabel("English");
-        buttonOne = new JButton("T");
-        buttonTwo = new JButton("S");
+        buttonOne = new JButton("Translate");
+        buttonTwo = new JButton("Save");
 
     }
 
@@ -46,10 +47,10 @@ public class BasicFrame extends JFrame {
     public void setSize() {
         textFieldOne.setPreferredSize(new Dimension(200, 200));
         textFieldTwo.setPreferredSize(new Dimension(200, 200));
-        buttonOne.setPreferredSize(new Dimension(50, 50));
-        buttonTwo.setPreferredSize(new Dimension(50, 50));
-        labelOne.setPreferredSize(new Dimension(number250, number20));
-        labelTwo.setPreferredSize(new Dimension(number250, number20));
+        buttonOne.setPreferredSize(new Dimension(150, 50));
+        buttonTwo.setPreferredSize(new Dimension(150, 50));
+        labelOne.setPreferredSize(new Dimension(labelWidth, labelHeight));
+        labelTwo.setPreferredSize(new Dimension(labelWidth, labelHeight));
     }
 
     public void addComponents(){
@@ -59,10 +60,12 @@ public class BasicFrame extends JFrame {
         add(textFieldTwo);
         add(buttonOne);
         add(buttonTwo);
-        buttonOne.addActionListener(handler);
+        buttonOne.addActionListener(translationListener);
     }
 
-    public class eHandler implements ActionListener{
+    public class TranslationListener implements ActionListener{
+
+        @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==buttonOne){
                  stringOne = textFieldOne.getText();
