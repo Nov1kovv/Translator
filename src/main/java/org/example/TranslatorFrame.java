@@ -23,7 +23,7 @@ public class TranslatorFrame extends JFrame {
     final int labelWidth = 250;
 
     TranslationListener translationListener = new TranslationListener();
-    SaveTranslateListenner saveTranslateListenner = new SaveTranslateListenner();
+    SaveTranslateListener saveTranslateListener = new SaveTranslateListener();
 
     public TranslatorFrame(String s) {
         super(s);
@@ -62,7 +62,7 @@ public class TranslatorFrame extends JFrame {
         add(buttonTranslate);
         add(buttonSave);
         buttonTranslate.addActionListener(translationListener);
-        buttonSave.addActionListener(saveTranslateListenner);
+        buttonSave.addActionListener(saveTranslateListener);
     }
 
     public class TranslationListener implements ActionListener {
@@ -97,13 +97,13 @@ public class TranslatorFrame extends JFrame {
         textFieldRussian.setText(translate);
     }
 
-    public class SaveTranslateListenner implements ActionListener{
+    public class SaveTranslateListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             stringEnglish = textFieldEnglish.getText();
-
-
+            textRussian = textFieldRussian.getText();
+            System.out.println(stringEnglish + " " + textRussian);
         }
     }
 }
