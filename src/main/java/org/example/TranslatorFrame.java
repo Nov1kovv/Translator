@@ -22,9 +22,6 @@ public class TranslatorFrame extends JFrame {
     final int labelHeight = 20;
     final int labelWidth = 250;
 
-    TranslationListener translationListener = new TranslationListener();
-    SaveTranslateListener saveTranslateListener = new SaveTranslateListener();
-
     public TranslatorFrame(String s) {
         super(s);
         setLayout(new FlowLayout());
@@ -61,24 +58,32 @@ public class TranslatorFrame extends JFrame {
         add(textFieldRussian);
         add(buttonTranslate);
         add(buttonSave);
-        buttonTranslate.addActionListener(translationListener);
-        buttonSave.addActionListener(saveTranslateListener);
-    }
 
-    public class TranslationListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == buttonTranslate) {
-                stringEnglish = textFieldEnglish.getText();
-                textRussian = stringEnglish;
-                textFieldRussian.setText(textRussian);
-                try {
-                    makeRequest();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+        //Анонимный класс
+        buttonTranslate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (actionEvent.getSource() == buttonTranslate) {
+                    stringEnglish = textFieldEnglish.getText();
+                    textRussian = stringEnglish;
+                    textFieldRussian.setText(textRussian);
+                    try {
+                        makeRequest();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
-        }
+        });
+
+        //lambda
+        buttonSave.addActionListener(actionEvent -> {
+            stringEnglish = textFieldEnglish.getText();
+            textRussian = textFieldRussian.getText();
+            String resultText = stringEnglish + " " + textRussian;
+
+
+        });
     }
 
     public void makeRequest() throws IOException {
@@ -95,15 +100,5 @@ public class TranslatorFrame extends JFrame {
 
         String translate = root.data.translations.toString();
         textFieldRussian.setText(translate);
-    }
-
-    public class SaveTranslateListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            stringEnglish = textFieldEnglish.getText();
-            textRussian = textFieldRussian.getText();
-            System.out.println(stringEnglish + " " + textRussian);
-        }
     }
 }
