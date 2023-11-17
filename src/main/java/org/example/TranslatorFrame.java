@@ -7,8 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -81,8 +80,16 @@ public class TranslatorFrame extends JFrame {
             stringEnglish = textFieldEnglish.getText();
             textRussian = textFieldRussian.getText();
             String resultText = stringEnglish + " " + textRussian;
-
-
+            String filePath = "C:\\Users\\Oleg\\Desktop\\text.txt";
+            try{
+                FileWriter writer = new FileWriter(filePath, false);
+                writer.write(resultText);
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("Saving file error ");
+                e.printStackTrace();
+            }
         });
     }
 
