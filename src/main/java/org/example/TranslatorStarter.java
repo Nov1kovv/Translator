@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class TranslatorStarter {
 
@@ -8,8 +9,12 @@ public class TranslatorStarter {
 
     public static void main(String[] args) {
         TranslatorFrame translatorFrame = new TranslatorFrame("Translator");
-        translatorFrame.setVisible(true);
+        Dimension fixedSize = new Dimension(550,350);
+        translatorFrame.setSize(fixedSize);
+        translatorFrame.setMinimumSize(fixedSize);
+        translatorFrame.setMaximumSize(fixedSize);
+        translatorFrame.setResizable(false); //статичный размер окна
         translatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        translatorFrame.setSize(frameWidth,350);
+        translatorFrame.setVisible(true);
     }
 }

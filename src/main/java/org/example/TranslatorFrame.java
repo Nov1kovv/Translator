@@ -79,16 +79,20 @@ public class TranslatorFrame extends JFrame {
         buttonSave.addActionListener(actionEvent -> {
             stringEnglish = textFieldEnglish.getText();
             textRussian = textFieldRussian.getText();
-            String resultText = stringEnglish + " " + textRussian;
+            String resultText = stringEnglish + " " + textRussian + "\n";
             String filePath = "C:\\Users\\Oleg\\Desktop\\text.txt";
             try{
-                FileWriter writer = new FileWriter(filePath, false);
+                FileWriter writer = new FileWriter(filePath, true);
                 writer.write(resultText);
+
                 writer.flush();
                 writer.close();
+
+
             } catch (IOException e) {
                 System.out.println("Saving file error ");
                 e.printStackTrace();
+
             }
         });
     }
