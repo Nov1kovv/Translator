@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TranslatorFrame extends JFrame {
-    JButton buttonTranslate, buttonSave;
+    JButton buttonTranslate, buttonSave, buttonDelete;
     JLabel labelEnglishLanguage, labelRussianLanguage;
     JTextField textFieldEnglish, textFieldRussian;
     URL url;
@@ -38,6 +38,7 @@ public class TranslatorFrame extends JFrame {
         labelEnglishLanguage = new JLabel("English");
         buttonTranslate = new JButton("Translate");
         buttonSave = new JButton("Save");
+        buttonDelete = new JButton("Delete text");
 
     }
 
@@ -46,6 +47,7 @@ public class TranslatorFrame extends JFrame {
         textFieldRussian.setPreferredSize(new Dimension(200, 200));
         buttonTranslate.setPreferredSize(new Dimension(150, 50));
         buttonSave.setPreferredSize(new Dimension(150, 50));
+        buttonDelete.setPreferredSize(new Dimension(150, 50));
         labelEnglishLanguage.setPreferredSize(new Dimension(labelWidth, labelHeight));
         labelRussianLanguage.setPreferredSize(new Dimension(labelWidth, labelHeight));
     }
@@ -57,6 +59,7 @@ public class TranslatorFrame extends JFrame {
         add(textFieldRussian);
         add(buttonTranslate);
         add(buttonSave);
+        add (buttonDelete);
 
         //Анонимный класс
         buttonTranslate.addActionListener(new ActionListener() {
@@ -95,7 +98,13 @@ public class TranslatorFrame extends JFrame {
 
             }
         });
+    buttonDelete.addActionListener(actionEvent -> {
+        textFieldRussian.setText("");
+        textFieldEnglish.setText("");
+            }
+            );
     }
+
 
     public void makeRequest() throws IOException {
 
