@@ -109,8 +109,8 @@ public class TranslatorFrame extends JFrame {
             String selectedLanguage = (String) selectLanguage.getSelectedItem();
             if (selectedLanguage.equals(Language.ENGLISH.getLongName())){
                 sourceLang = Language.ENGLISH.getShortName();
-            } else if (selectedLanguage.equals("German")){
-                sourceLang = "de";
+            } else if (selectedLanguage.equals(Language.GERMAN.getLongName())){
+                sourceLang = Language.GERMAN.getShortName();
             }
         }
         });
@@ -136,5 +136,30 @@ public class TranslatorFrame extends JFrame {
 
         String translate = root.data.translations.toString();
         textFieldRussian.setText(translate);
+
+
     }
+
+
+
+    public enum Language {
+
+        ENGLISH("en", "English"),
+        GERMAN("de", "German");
+        private String shortName;
+        private String longName;
+
+        Language(String shortName, String longName) {
+            this.shortName = shortName;
+            this.longName = longName;
+        }
+
+        public String getShortName() {
+            return shortName;
+        }
+
+        public String getLongName() {
+            return longName;
+        }
+        }
 }
