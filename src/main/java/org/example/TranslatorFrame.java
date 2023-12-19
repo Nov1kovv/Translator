@@ -15,11 +15,15 @@ public class TranslatorFrame extends JFrame {
     JButton buttonTranslate, buttonSave, buttonDelete;
     JLabel labelEnglishLanguage, labelRussianLanguage;
     JTextField textFieldEnglish, textFieldRussian;
+    JComboBox selectLanguage;
     URL url;
     String stringEnglish;
+    String[] selectLanguageJCompoBox={"English", "Germany"};
     String textRussian;
     final int labelHeight = 20;
     final int labelWidth = 250;
+    String sourceLang = "en";
+    String targetLang = "ru";
 
     public TranslatorFrame(String s) {
         super(s);
@@ -39,6 +43,7 @@ public class TranslatorFrame extends JFrame {
         buttonTranslate = new JButton("Translate");
         buttonSave = new JButton("Save");
         buttonDelete = new JButton("Delete text");
+        selectLanguage = new JComboBox<>(selectLanguageJCompoBox);
 
     }
 
@@ -60,6 +65,7 @@ public class TranslatorFrame extends JFrame {
         add(buttonTranslate);
         add(buttonSave);
         add (buttonDelete);
+        add(selectLanguage);
 
         //Анонимный класс
         buttonTranslate.addActionListener(new ActionListener() {
@@ -98,6 +104,16 @@ public class TranslatorFrame extends JFrame {
 
             }
         });
+        selectLanguage.addItemListener(itemEvent -> {
+        if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+            String selectedLanguage = (String) selectLanguage.getSelectedItem();
+            if (selectedLanguage.equals("English")){
+                sourceLang = "en";
+            } else if (selectedLanguage.equals("Germany")){
+                sourceLang = "de";
+            }
+        }
+        });
     buttonDelete.addActionListener(actionEvent -> {
         textFieldRussian.setText("");
         textFieldEnglish.setText("");
@@ -109,7 +125,7 @@ public class TranslatorFrame extends JFrame {
     public void makeRequest() throws IOException {
 
         String text = textFieldEnglish.getText();
-        url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source=en&target=ru&q=" + text.replaceAll("\\s+", "+"));
+        url = new URL("https://www.googleapis.com/language/translate/v2?key=AIzaSyBcnEcR3MoyfHpBMDJtI6yHduSmz9aQH7k&source="+sourceLang+"&target="+targetLang+"&q=" + text.replaceAll("\\s+", "+"));
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("accept", "application/json");
