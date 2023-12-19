@@ -18,7 +18,7 @@ public class TranslatorFrame extends JFrame {
     JComboBox selectLanguage;
     URL url;
     String stringEnglish;
-    String[] selectLanguageJCompoBox={"English", "Germany"};
+    String[] selectLanguageJCompoBox={"English", "German"};
     String textRussian;
     final int labelHeight = 20;
     final int labelWidth = 250;
@@ -107,9 +107,9 @@ public class TranslatorFrame extends JFrame {
         selectLanguage.addItemListener(itemEvent -> {
         if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
             String selectedLanguage = (String) selectLanguage.getSelectedItem();
-            if (selectedLanguage.equals("English")){
-                sourceLang = "en";
-            } else if (selectedLanguage.equals("Germany")){
+            if (selectedLanguage.equals(Language.ENGLISH.getLongName())){
+                sourceLang = Language.ENGLISH.getShortName();
+            } else if (selectedLanguage.equals("German")){
                 sourceLang = "de";
             }
         }
